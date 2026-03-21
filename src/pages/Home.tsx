@@ -14,6 +14,11 @@ const Home = () => {
   const navigate = useNavigate();
   const { username, setUsername } = useAppContext();
 
+  const handleNext = () => {
+    if (username.trim() === "") return;
+    navigate("/details");
+  };
+
   return (
     <PageWrapper>
       <ContentArea>
@@ -22,11 +27,20 @@ const Home = () => {
 
           <InputRow>
             <NameInput
+              type="text"
+              placeholder="Enter your name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your name"
             />
-            <PrimaryButton onClick={() => navigate("/details")}>
+
+            <PrimaryButton
+              onClick={handleNext}
+              disabled={username.trim() === ""}
+              style={{
+                opacity: username.trim() === "" ? 0.5 : 1,
+                cursor: username.trim() === "" ? "not-allowed" : "pointer",
+              }}
+            >
               Next
             </PrimaryButton>
           </InputRow>
