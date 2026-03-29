@@ -3,6 +3,12 @@ import { NavWrapper, NavList, NavButton } from "../styles/GlobalStyles";
 import { useState } from "react";
 import MobileSidebar from "./MobileSidebar";
 
+const navItems = [
+  { path: "/", name: "Home" },
+  { path: "/details", name: "Details" },
+  { path: "/saved", name: "Saved" },
+];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
@@ -18,23 +24,13 @@ const Navbar = () => {
 
       <NavWrapper className="desktop-menu">
         <NavList>
-          <NavLink to="/">
-            {({ isActive }) => (
-              <NavButton $active={isActive}>Home</NavButton>
-            )}
-          </NavLink>
-
-          <NavLink to="/details">
-            {({ isActive }) => (
-              <NavButton $active={isActive}>Details</NavButton>
-            )}
-          </NavLink>
-
-          <NavLink to="/saved">
-            {({ isActive }) => (
-              <NavButton $active={isActive}>Saved</NavButton>
-            )}
-          </NavLink>
+          {navItems.map((item) => (
+            <NavLink key={item.path} to={item.path}>
+              {({ isActive }) => (
+                <NavButton $active={isActive}>{item.name}</NavButton>
+              )}
+            </NavLink>
+          ))}
         </NavList>
       </NavWrapper>
     </>

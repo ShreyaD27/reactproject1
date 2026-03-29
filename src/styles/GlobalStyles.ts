@@ -1,4 +1,4 @@
-import { createGlobalStyle, styled } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -9,8 +9,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: #ffffff;
-    color: #111827;
+    background: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
   }
 
   a {
@@ -46,7 +46,7 @@ export default GlobalStyles;
 
 export const TopBar = styled.div`
   width: 100%;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   display: flex;
   justify-content: center;
   padding: 60px 16px 24px;
@@ -66,10 +66,12 @@ export const NavList = styled.div`
 export const NavButton = styled.button<{ $active: boolean }>`
   min-width: 120px;
   padding: 14px 24px;
-  border: 1px solid #d1d5db;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 14px;
-  background: ${({ $active }) => ($active ? "#2563eb" : "#ffffff")};
-  color: ${({ $active }) => ($active ? "#ffffff" : "#111827")};
+  background: ${({ $active, theme }) =>
+    $active ? theme.colors.primary : theme.colors.background};
+  color: ${({ $active, theme }) =>
+    $active ? "#ffffff" : theme.colors.text};
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
@@ -107,14 +109,14 @@ export const NameInput = styled.input`
   width: 440px;
   padding: 18px;
   border-radius: 14px;
-  border: 1px solid #d1d5db;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   font-size: 18px;
 `;
 
 export const PrimaryButton = styled.button`
   padding: 18px 28px;
   border-radius: 14px;
-  background: #2563eb;
+  background: ${({ theme }) => theme.colors.primary};
   color: white;
   font-weight: bold;
   font-size: 18px;
@@ -157,9 +159,10 @@ export const PaginationWrapper = styled.div`
 
 export const PageButton = styled.button<{ $active: boolean }>`
   padding: 10px 14px;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
-  background: ${({ $active }) => ($active ? "#2563eb" : "#fff")};
+  background: ${({ $active, theme }) =>
+    $active ? theme.colors.primary : theme.colors.background};
   color: ${({ $active }) => ($active ? "#fff" : "#000")};
   cursor: pointer;
 `;

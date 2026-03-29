@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { useAppContext } from "../context/useAppContext";
 import type { ImageItem } from "../types";
 
@@ -11,9 +12,8 @@ const CardItem = ({ image }: Props) => {
   const saved = isImageSaved(image.id);
 
   return (
-    <div style={cardStyle}>
-      
-      <div style={header}>
+    <Card>
+      <Header>
         <span>{image.author}</span>
 
         <input
@@ -21,43 +21,41 @@ const CardItem = ({ image }: Props) => {
           checked={saved}
           onChange={() => toggleSaveImage(image)}
         />
-      </div>
+      </Header>
 
-      <div style={line}></div>
+      <Line />
 
-      <img
+      <StyledImage
         src={image.download_url}
         alt="img"
-        style={imageStyle}
       />
-
-    </div>
+    </Card>
   );
 };
 
 export default CardItem;
 
-const cardStyle: React.CSSProperties = {
-  border: "1px solid #ccc",
-  borderRadius: "12px",
-  padding: "0",
-  overflow: "hidden",
-};
+const Card = styled.div`
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+`;
 
-const header: React.CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "8px 12px",
-  fontWeight: 600,
-};
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  font-weight: 600;
+`;
 
-const line: React.CSSProperties = {
-  borderBottom: "1px solid #ccc",
-};
+const Line = styled.div`
+  border-bottom: 1px solid #ccc;
+`;
 
-const imageStyle: React.CSSProperties = {
-  width: "100%",
-  height: "180px",
-  objectFit: "cover",
-};
+const StyledImage = styled.img`
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+`;
